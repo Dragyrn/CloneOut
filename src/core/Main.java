@@ -20,15 +20,52 @@
 
 package core;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application
 {
+	//private boolean licenseAccepted = false;
+	//Scanner fileRead = new Scanner(new File("Misc/LICENSE"));
+	private File license = new File("/CloneOut/Misc/LICENSE");
+	private Scanner fileRead;
+	
 	public void start(Stage primaryStage)
 	{
 		{ //License check
+			Stage licenseStage = new Stage();
 			
+			BorderPane primaryPane = new BorderPane();
+			TextArea licenseArea = new TextArea();
+			Button acceptButton = new Button("I accept these terms"), 
+				   denyButton = new Button("I do not accept these terms");
+			
+			licLoop:
+			do
+			{
+				try
+				{
+					fileRead = new Scanner(license);
+				}
+				catch(FileNotFoundException ex)
+				{
+					GenerateLicense.generateLicense();
+					continue licLoop;
+				}
+			}while(false);
+			
+			//fileRead = new Scanner(license);
+			licenseArea.setEditable(false);
+			licenseArea.setWrapText(true);
+			while(fileRead.hasNext())
+				licenseArea.setText(licenseArea.getText() + "\n" + fileRead.nextLine());
 		}
 	}
 	

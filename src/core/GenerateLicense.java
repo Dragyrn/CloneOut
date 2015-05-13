@@ -18,9 +18,12 @@
  * 
  */
 
-package License;
+package core;
 
-public class LicenseAlert
+public class GenerateLicense
 {
-
+	public static void generateLicense()
+	{
+		
+	}
 }
