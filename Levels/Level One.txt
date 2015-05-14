@@ -1,0 +1,31 @@
+# g = green brick
+# y = yellow brick
+# o = orange brick
+# r = red brick
+# * = empty space
+# 
+# Field is 832 X 608 pixels. Field can hold 
+# 13 X 19 bricks total, though unadvised.
+# 
+# A suggested field size is shown here:
+# |-------------|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*ggggggggggg*|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |*************|
+# |-------------|

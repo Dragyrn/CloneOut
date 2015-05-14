@@ -88,7 +88,7 @@ public class Main extends Application
 		
 		
 		
-		primaryStage.setScene(new Scene(new Pane(new Button("game")), 100, 100));
+		primaryStage.setScene(new Scene(new Pane(new Button("game")), 832, 600));
 		primaryStage.setTitle("game");
 		acceptLicenseButton.setOnAction(e -> 
 		{
