@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Images"/>
 	<classpathentry kind="lib" path="Misc"/>
+	<classpathentry kind="lib" path="Levels"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
