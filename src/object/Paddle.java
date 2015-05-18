@@ -20,6 +20,7 @@
 
 package object;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -30,8 +31,7 @@ public class Paddle extends Pane
 	public Paddle()
 	{
 		super();
-		paddleGraphic = new ImageView("images/paddle.png");
-		//paddleGraphic = new ImageView("/CloneOut/Images/paddle.png");
+		paddleGraphic = new ImageView(new Image("/paddle.png"));
 		getChildren().add(paddleGraphic);
 	}
 	

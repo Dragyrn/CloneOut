@@ -59,11 +59,21 @@ public class Main extends Application
 		
 		primaryPane = new Pane();
 		paddle = new Paddle();
+		paddle.setLayoutY(594 - paddle.getHeight());
 		primaryPane.getChildren().add(paddle);
 		
-		//primaryStage.setScene(new Scene(new Pane(new Button("game")), 832, 600));
+		primaryPane.setOnKeyPressed(e -> 
+		{
+			switch (e.getCode())
+			{
+			case RIGHT:
+				
+			}
+		});
+		
 		primaryStage.setScene(new Scene(primaryPane, 832, 600));
 		primaryStage.setTitle("game");
+		primaryStage.setResizable(false);
 		acceptLicenseButton.setOnAction(e -> 
 		{
 			primaryStage.show();
