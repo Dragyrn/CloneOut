@@ -20,6 +20,8 @@
 
 package core;
 
+import object.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -38,21 +40,49 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-	//private boolean licenseAccepted = false;
-	//Scanner fileRead = new Scanner(new File("Misc/LICENSE"));
+	//LicenseCheck items
+	Stage licenseStage;
+	BorderPane lPrimaryPane;
+	TextArea licenseArea;
+	Button acceptLicenseButton;
+	Button denyLicenseButton;
+	CheckBox doNotDisplayLicense;
+	HBox buttonPane;
+	
+	//Game items
+	Pane primaryPane;
+	Paddle paddle;
 
 	public void start(Stage primaryStage)
 	{
-		/* *****LICENSE CHECK***** */
-		Stage licenseStage = new Stage();
+		licenseCheck();
+		
+		primaryPane = new Pane();
+		paddle = new Paddle();
+		primaryPane.getChildren().add(paddle);
+		
+		//primaryStage.setScene(new Scene(new Pane(new Button("game")), 832, 600));
+		primaryStage.setScene(new Scene(primaryPane, 832, 600));
+		primaryStage.setTitle("game");
+		acceptLicenseButton.setOnAction(e -> 
+		{
+			primaryStage.show();
+			licenseStage.hide();
+		});
+	}
+	
+	public void licenseCheck()
+	{
+		licenseStage = new Stage();
+		licenseStage.setResizable(false);
 
-		BorderPane lPrimaryPane = new BorderPane();
+		lPrimaryPane = new BorderPane();
 		lPrimaryPane.setPadding(new Insets(10));
-		TextArea licenseArea = new TextArea();
-		Button acceptLicenseButton = new Button("I accept"), 
-				denyLicenseButton = new Button("I do not accept");
-		CheckBox doNotDisplayLicense = new CheckBox("Don't show again");
-		HBox buttonPane = new HBox(20);
+		licenseArea = new TextArea();
+		acceptLicenseButton = new Button("I accept");
+		denyLicenseButton = new Button("I do not accept");
+		doNotDisplayLicense = new CheckBox("Don't show again");
+		buttonPane = new HBox(20);
 
 		Scanner fileRead = null;
 		do
@@ -83,18 +113,6 @@ public class Main extends Application
 		licenseStage.setScene(lScene);
 		licenseStage.setTitle("LICENSE");
 		licenseStage.show();
-		/* *****LICENSE CHECK***** */
-		
-		
-		
-		
-		primaryStage.setScene(new Scene(new Pane(new Button("game")), 832, 600));
-		primaryStage.setTitle("game");
-		acceptLicenseButton.setOnAction(e -> 
-		{
-			primaryStage.show();
-			licenseStage.hide();
-		});
 	}
 
 	public static void main(String[] args)
