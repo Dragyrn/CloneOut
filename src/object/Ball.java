@@ -20,23 +20,12 @@
 
 package object;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
-public class Paddle extends Pane
+public class Ball
 {
-	ImageView paddleGraphic;
 	
-	public Paddle()
-	{
-		super();
-		paddleGraphic = new ImageView(new Image("/paddle.png"));
-		getChildren().add(paddleGraphic);
-	}
 	
-	public void move(int n)
+	public Ball()
 	{
-		setLayoutX(getLayoutX() + n);
+		
 	}
 }

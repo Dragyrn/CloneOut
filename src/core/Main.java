@@ -62,14 +62,7 @@ public class Main extends Application
 		paddle.setLayoutY(594 - paddle.getHeight());
 		primaryPane.getChildren().add(paddle);
 		
-		primaryPane.setOnKeyPressed(e -> 
-		{
-			switch (e.getCode())
-			{
-			case RIGHT:
-				
-			}
-		});
+		
 		
 		primaryStage.setScene(new Scene(primaryPane, 832, 600));
 		primaryStage.setTitle("game");
@@ -78,6 +71,7 @@ public class Main extends Application
 		{
 			primaryStage.show();
 			licenseStage.hide();
+			primaryPane.requestFocus();
 		});
 	}
 	
