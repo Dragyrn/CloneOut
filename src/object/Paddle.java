@@ -28,6 +28,7 @@ public class Paddle extends Pane
 {
 	ImageView paddleGraphic;
 	
+	
 	public Paddle()
 	{
 		super();

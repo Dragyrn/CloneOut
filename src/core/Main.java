@@ -24,8 +24,10 @@ import object.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,34 +38,69 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application
 {
 	//LicenseCheck items
-	Stage licenseStage;
-	BorderPane lPrimaryPane;
-	TextArea licenseArea;
-	Button acceptLicenseButton;
-	Button denyLicenseButton;
-	CheckBox doNotDisplayLicense;
-	HBox buttonPane;
+	private Stage licenseStage;
+	private BorderPane lPrimaryPane;
+	private TextArea licenseArea;
+	private Button acceptLicenseButton;
+	private Button denyLicenseButton;
+	private CheckBox doNotDisplayLicense;
+	private HBox buttonPane;
 	
 	//Game items
-	Pane primaryPane;
-	Paddle paddle;
+	private Timeline animation;
+	private byte velocity;
+	private Pane primaryPane;
+	private Paddle paddle;
+	private final int NW = 0,
+					  NE = 1,
+					  SE = 2,
+					  SW = 3;
 
 	public void start(Stage primaryStage)
 	{
 		licenseCheck();
-		
+
 		primaryPane = new Pane();
 		paddle = new Paddle();
 		paddle.setLayoutY(594 - paddle.getHeight());
 		primaryPane.getChildren().add(paddle);
-		
-		
-		
+
+
+
+		animation = new Timeline(new KeyFrame(Duration.millis(3), e -> 
+		{
+			
+			primaryPane.setOnKeyPressed(k -> 
+			{
+				switch (k.getCode())
+				{
+				case RIGHT:
+					velocity = 1;
+					break;
+				case LEFT:
+					velocity = -1;
+					break;
+				}
+			});
+			primaryPane.setOnKeyReleased(k -> 
+			{
+				if(k.getCode() == KeyCode.RIGHT || k.getCode() == KeyCode.LEFT)
+					velocity = 0;
+			});
+			paddle.move(velocity);
+			if(paddle.getLayoutX() < 0 || paddle.getLayoutX() > (842 - paddle.getWidth()))
+				paddle.move(-velocity);
+		}));
+		animation.setCycleCount(Timeline.INDEFINITE);
+
+
 		primaryStage.setScene(new Scene(primaryPane, 832, 600));
 		primaryStage.setTitle("game");
 		primaryStage.setResizable(false);
@@ -71,6 +108,7 @@ public class Main extends Application
 		{
 			primaryStage.show();
 			licenseStage.hide();
+			animation.play();
 			primaryPane.requestFocus();
 		});
 	}
