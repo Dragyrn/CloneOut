@@ -26,7 +26,7 @@ public class Brick extends Pane
 {
 	
 	
-	public Brick(byte Strength)
+	public Brick()
 	{
 		
 	}

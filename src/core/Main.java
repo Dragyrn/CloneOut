@@ -38,6 +38,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -58,6 +59,7 @@ public class Main extends Application
 	private byte velocity;
 	private Pane primaryPane;
 	private Paddle paddle;
+	private Ball ball;
 	private final int NW = 0,
 					  NE = 1,
 					  SE = 2,
@@ -70,7 +72,10 @@ public class Main extends Application
 		primaryPane = new Pane();
 		paddle = new Paddle();
 		paddle.setLayoutY(594 - paddle.getHeight());
-		primaryPane.getChildren().add(paddle);
+		ball = new Ball(Color.RED);
+		ball.setLayoutX(200);
+		ball.setLayoutY(200);
+		primaryPane.getChildren().addAll(paddle, ball);
 
 
 

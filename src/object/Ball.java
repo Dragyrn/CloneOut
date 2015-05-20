@@ -20,12 +20,35 @@
 
 package object;
 
-public class Ball
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorInput;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
+public class Ball extends Pane
 {
+	ImageView ballGraphic;
+	Blend colorize;
 	
-	
-	public Ball()
+	public Ball(Color color)
 	{
-		
+		super();
+		//ballGraphic = new ImageView(new Image("/ball_base.png"));
+		ballGraphic = new ImageView(new Image("/ball_base2.png"));
+		colorize = new Blend(BlendMode.SRC_ATOP, new ImageInput(ballGraphic.getImage()), 
+				new ColorInput(0, 0, ballGraphic.getImage().getWidth(), ballGraphic.getImage().getHeight(), 
+				new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.5)));
+		ballGraphic.setEffect(colorize);
+		this.getChildren().add(ballGraphic);
 	}
+	
+	/*public Ball()
+	{
+		super();
+		
+	}/**/
 }
