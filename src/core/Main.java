@@ -39,6 +39,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -60,37 +61,81 @@ public class Main extends Application
 	private Pane primaryPane;
 	private Paddle paddle;
 	private Ball ball;
-	private final int NW = 0,
-					  NE = 1,
-					  SE = 2,
-					  SW = 3;
+	private int ballDirection = 0;
+	private boolean goingUp = true,
+					goingLeft = true;
 
 	public void start(Stage primaryStage)
 	{
 		licenseCheck();
 
 		primaryPane = new Pane();
+		primaryPane.setStyle("-fx-border-color: red");
 		paddle = new Paddle();
 		paddle.setLayoutY(594 - paddle.getHeight());
 		ball = new Ball(Color.RED);
 		ball.setLayoutX(200);
 		ball.setLayoutY(200);
 		primaryPane.getChildren().addAll(paddle, ball);
+		
+		/*Circle test = new Circle(0, 0, 10);
+		primaryPane.getChildren().add(test);*/
 
 
 
 		animation = new Timeline(new KeyFrame(Duration.millis(3), e -> 
 		{
+			if(goingUp)
+				ball.moveY(-1);
+			else
+				ball.moveY(1);
+			
+			if(goingLeft)
+				ball.moveX(-1);
+			else
+				ball.moveX(1);
+			
+			if(ball.getLayoutX() < 0)
+			{
+				goingLeft = false;
+				System.out.println("bounce");
+			}
+			else if((ball.getLayoutX() + ball.getWidth()) > primaryPane.getWidth())
+			{
+				goingLeft = true;
+				System.out.println("bounce");
+			}
+			
+			if(ball.getLayoutY() < 0)
+			{
+				goingUp = false;
+				System.out.println("bounce");
+			}
+			else if((ball.getLayoutY() + ball.getHeight()) > primaryPane.getHeight())
+			{
+				goingUp = true;
+				System.out.println("bounce");
+			}
+			
+			//System.out.println(ball.getLayoutY());
+			
+			//if(paddle.contains(ball.getCenterX(), ball.getLayoutY() + ball.getHeight()))
+			//if(paddle.intersects(ball.getBoundsInParent()))
+			if(ball.intersects(paddle.getBoundsInParent()))
+			{
+				System.out.println("dang");
+				//goingUp = true;
+			}
 			
 			primaryPane.setOnKeyPressed(k -> 
 			{
 				switch (k.getCode())
 				{
 				case RIGHT:
-					velocity = 1;
+					velocity = 2;
 					break;
 				case LEFT:
-					velocity = -1;
+					velocity = -2;
 					break;
 				}
 			});
@@ -115,8 +160,32 @@ public class Main extends Application
 			licenseStage.hide();
 			animation.play();
 			primaryPane.requestFocus();
+			System.out.println(primaryPane.getWidth() + ", " + primaryPane.getHeight());
 		});
 	}
+	
+	/*public void moveBall()
+	{
+		switch (ballDirection)
+		{
+		case NW:
+			ball.setLayoutX(ball.getLayoutX() - 1);
+			ball.setLayoutY(ball.getLayoutY() - 1);
+			break;
+		case NE:
+			ball.setLayoutX(ball.getLayoutX() + 1);
+			ball.setLayoutY(ball.getLayoutY() - 1);
+			break;
+		case SE:
+			ball.setLayoutX(ball.getLayoutX() + 1);
+			ball.setLayoutY(ball.getLayoutY() + 1);
+			break;
+		case SW:
+			ball.setLayoutX(ball.getLayoutX() - 1);
+			ball.setLayoutY(ball.getLayoutY() + 1);
+			break;
+		}
+	}*/
 	
 	public void licenseCheck()
 	{

@@ -46,6 +46,26 @@ public class Ball extends Pane
 		this.getChildren().add(ballGraphic);
 	}
 	
+	public void moveX(int x)
+	{
+		setLayoutX(getLayoutX() + x);
+	}
+	
+	public void moveY(int y)
+	{
+		setLayoutY(getLayoutY() + y);
+	}
+	
+	public double getCenterX()
+	{
+		return (getLayoutX() + ballGraphic.getFitWidth()) / 2;
+	}
+	
+	public double getCenterY()
+	{
+		return (getLayoutY() + ballGraphic.getFitHeight()) / 2;
+	}
+	
 	/*public Ball()
 	{
 		super();
